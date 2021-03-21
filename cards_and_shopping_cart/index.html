@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="form">
+        <label>
+            <p>Картинка</p>
+            <input id="image" type="text" name="image">
+            <p>Цена</p>
+            <input id="price" type="text" name="price">
+            <p>Описание</p>
+            <input id="description" type="text" name="description">
+            <input type="submit" value="Создать товар" onclick="pushIt()">
+        </label>
+    </div>
+    <div class="products-section">
+        <div class="products-section-header">
+            <input type="submit" onclick="sortByPrice()" value="Сортировать по убыванию цены" name="sortByPrice">
+        </div>
+    <div class="products" id ='all_products'>
+    </div>
+    </div>
+</div>
+<h1>Корзина покупок</h1>
+<div class="shopping-cart">
+
+    <div class="column-labels">
+        <label class="product-image">Image</label>
+        <label class="product-details">Product</label>
+        <label class="product-price">Цена</label>
+        <label class="product-quantity">Количество</label>
+        <label class="product-removal">Удалить</label>
+        <label class="product-line-price">Всего</label>
+    </div>
+<div id="shopping-cart-products">
+</div>
+    <div class="totals">
+        <div class="totals-item totals-item-total">
+            <label>Общая сумма</label>
+            <div class="totals-value" id="cart-total"></div>
+        </div>
+    </div>
+
+    <button class="checkout">Оформить заказ</button>
+
+</div>
+<script
+        src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js" integrity="sha384-5h4UG+6GOuV9qXh6HqOLwZMY4mnLPraeTrjT5v07o347pj6IkfuoASuGBhfDsp3d" crossorigin="anonymous"></script>
+<script src="script.js"></script>
+</body>
+</html>
