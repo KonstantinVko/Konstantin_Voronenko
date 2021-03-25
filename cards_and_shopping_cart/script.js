@@ -76,7 +76,6 @@ function addToCart(card) {
     for (let i = 0; i < arr.length; i++) {
         arr[i].quantity = 1;
         if (arr[i].id === attr) {
-
             for (let j = 0; j < shoppingCart.length; j++) {
                 if (arr[i].id === shoppingCart[j].id) {
                     shoppingCart[j].quantity++;
@@ -100,7 +99,7 @@ function countPrice() {
     let shoppingCartArr = productsArr;
     let totalPrice = 0;
     for (let i = 0; i < shoppingCartArr.length; i++) {
-        totalPrice += parseInt(shoppingCartArr[i].price);
+        totalPrice += parseInt(shoppingCartArr[i].price) * parseInt(shoppingCartArr[i].quantity);
     }
     document.getElementById('cart-total').innerHTML = totalPrice.toString();
 }
@@ -109,20 +108,32 @@ function countPrice() {
 function shoppingCartRender(ShoppingCart) {
     let arr = ShoppingCart;
     for (let i = 0; i < arr.length; i++) {
-        str = '<div class="product">' +
+        str = '<div class="product" data-id="'+ arr[i].id +'">' +
             '<div class="product-image"> <img src="' + arr[i].image + '"> </div> ' +
             '<div class="product-details">' + '<p class="product-description">' + arr[i].description + '</p></div>' +
             '<div class="product-price">' + arr[i].price + '</div>' +
             '<div class="product-quantity">' +
-            '<input type="number" value="' + arr[i].quantity + '" min="1" data-id="'+ arr[i].id +'"></div>' +
+            '<input type="number" value="' + arr[i].quantity + '" min="1" data-id="'+ arr[i].id +'" onchange="changeQuantity(this)"></div>' +
             '<div class="product-removal">' + '<button class="remove-product">' + 'Удалить' + '</button>' + '</div>' +
-            '<div class="product-line-price">' + arr[i].price + '</div></div>'
+            '<div class="product-line-price">' + arr[i].price * arr[i].quantity + '</div></div>'
         document.getElementById('shopping-cart-products').innerHTML += str;
-
     }
 }
 
 
 
+function changeQuantity(data) {
+    let value = data.value;
+    let id = data.getAttribute('data-id');
+    for (let i = 0; i < shoppingCart.length; i++) {
+        if (parseInt(id) === shoppingCart[i].id){
+            shoppingCart[i].quantity = value;
+            console.log(shoppingCart);
+            document.getElementById('shopping-cart-products').innerHTML = '';
+            shoppingCartRender(shoppingCart);
+            countPrice();
+        }
+    }
+}
 
 
