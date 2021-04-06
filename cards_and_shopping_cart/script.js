@@ -88,7 +88,6 @@ function addToCart(card) {
 
         }
     }
-    ;
     document.getElementById('shopping-cart-products').innerHTML = '';
     shoppingCartRender(shoppingCart);
     countPrice();
