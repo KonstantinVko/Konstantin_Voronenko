@@ -1,0 +1,21 @@
+body {
+    background: rgb(0, 36, 34);
+    background: linear-gradient(90deg, rgba(0, 36, 34, 1) 0%, rgba(66, 121, 9, 1) 0%, rgba(255, 209, 0, 1) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#field {
+    height: 500px;
+    width: 500px;
+    background: lightblue;
+    position: relative;
+}
+
+#snake {
+    height: 30px;
+    width: 30px;
+    background: #ff5001;
+    position: relative;
+}
