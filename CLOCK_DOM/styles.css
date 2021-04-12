@@ -1,0 +1,125 @@
+#app {
+    width: 300px;
+    height: 300px;
+    border-radius: 150px;
+    background-color: #FCCA66;
+}
+
+.smallCircle {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #48B382;
+    position: absolute;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+}
+
+.one {
+    left: 198px;
+    top: 34px;
+}
+
+.two {
+    left: 242px;
+    top: 78px;
+}
+
+.three {
+    left: 258px;
+    top: 138px;
+}
+
+.four {
+    left: 242px;
+    top: 198px;
+}
+
+.five {
+    left: 198px;
+    top: 242px;
+}
+
+.six {
+    left: 138px;
+    top: 258px;
+}
+
+.seven {
+    left: 78px;
+    top: 242px;
+}
+
+.eight {
+    left: 34px;
+    top: 198px;
+}
+
+.nine {
+    left: 18px;
+    top: 138px;
+}
+
+.ten {
+    left: 34px;
+    top: 78px;
+}
+
+.eleven {
+    left: 78px;
+    top: 34px;
+}
+
+.twelve {
+    left: 138px;
+    top: 18px;
+}
+
+.digitalWatch {
+    width: 120px;
+    height: 30px;
+    position: absolute;
+    text-align: center;
+    line-height: 30px;
+    font-size: 25px;
+    color: black;
+    left: 100px;
+    top: 75px;
+}
+
+.hoursArrow {
+    width: 9px;
+    height: 60px;
+    border-radius: 10px;
+    position: absolute;
+    background-color: black;
+    top: 108px;
+    left: 153px;
+    transform-origin: center 50px;
+    transform: rotate(0deg);
+}
+
+.minutesArrow {
+    width: 5px;
+    height: 120px;
+    border-radius: 10px;
+    position: absolute;
+    background-color: black;
+    top: 48px;
+    left: 155px;
+    transform-origin: center 110px;
+    transform: rotate(0deg);
+}
+
+.secondsArrow {
+    width: 2px;
+    height: 145px;
+    border-radius: 10px;
+    position: absolute;
+    background-color: red;
+    top: 23px;
+    left: 157px;
+    transform-origin: center 135px;
+    transform: rotate(0deg);
+}
