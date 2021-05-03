@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="styles.css" rel="stylesheet">
+    <title>Hello, world!</title>
+</head>
+<body>
+
+
+<div class="container">
+    <h1>Онлайн-магазин</h1>
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                    type="button"
+                    role="tab" aria-controls="nav-home" aria-selected="true">HR
+            </button>
+            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                    type="button"
+                    role="tab" aria-controls="nav-profile" aria-selected="false">Content
+            </button>
+            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
+                    type="button"
+                    role="tab" aria-controls="nav-contact" aria-selected="false">Logistics
+            </button>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <form>
+                <div>
+                <label for="name">Имя</label>
+                    <br>
+                <input type="text" id="name">
+                </div>
+                <div>
+                    <label for="surname">Фамилия</label>
+                    <br>
+                    <input type="text" id="surname">
+                </div>
+                <div>
+                    <label for="name">Должность</label>
+                    <br>
+                    <input type="text" id="who">
+                </div>
+                <div>
+                    <label for="salary">Зарплата</label>
+                    <br>
+                    <input type="number" id="salary">
+                </div>
+                <div>
+                    <label for="from">Гражданство</label>
+                    <br>
+                    <input type="text" id="from">
+                </div>
+                <div>
+                    <label for="fromLive">Место жительства</label>
+                    <br>
+                    <input type="text" id="fromLive">
+                </div>
+                <div>
+                    <label for="grade">Образование</label>
+                    <br>
+                    <input type="text" id="grade">
+                </div>
+                <div>
+                    <label>Пол</label>
+                    <br>
+                    <span>Мужской</span><input type="radio" value="man" name="sex">
+                    <span>Женский</span><input type="radio" value="woman" name="sex">
+                </div>
+                <div>
+                    <label>Семейное положение:</label>
+                    <br>
+                    <span>женат/замужем</span> <input type="checkbox" value="married">
+                </div>
+                <div>
+                    <label for="birthDate">Дата рождения:</label>
+                    <br>
+                    <input type="date" id="birthDate">
+                </div>
+                <input type="submit" value="Сохранить">
+            </form>
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <form>
+                <div>
+                    <label for="productType">Тип товара</label>
+                    <br>
+                    <input type="text" id="productType">
+                </div>
+                <div>
+                    <label for="manufacturer">Поизводитель</label>
+                    <br>
+                    <input type="text" id="manufacturer">
+                </div>
+                <div>
+                    <label for="name">Магазины</label>
+                    <br>
+                    <p><select size="3" style="width: 40%">
+                        <option>Onliner</option>
+                        <option value="tut">Tut.by</option>
+                        <option selected value="21">21vek</option>
+                    </select></p>
+                </div>
+                <div>
+                    <label for="productionDate">Дата производства</label>
+                    <br>
+                    <input type="number" id="productionDate">
+                </div>
+                <div>
+                    <label for="from">Гражданство</label>
+                    <br>
+                    <input type="text" id="from">
+                </div>
+                <div>
+                    <label for="fromLive">Место жительства</label>
+                    <br>
+                    <input type="text" id="fromLive">
+                </div>
+                <div>
+                    <label for="grade">Образование</label>
+                    <br>
+                    <input type="text" id="grade">
+                </div>
+                <div>
+                    <label>Пол</label>
+                    <br>
+                    <span>Мужской</span><input type="radio" value="man" name="sex">
+                    <span>Женский</span><input type="radio" value="woman" name="sex">
+                </div>
+                <div>
+                    <label>Семейное положение:</label>
+                    <br>
+                    <span>женат/замужем</span> <input type="checkbox" value="married">
+                </div>
+                <div>
+                    <label for="birthDate">Дата рождения:</label>
+                    <br>
+                    <input type="date" id="birthDate">
+                </div>
+                <input type="submit" value="Сохранить">
+            </form>
+        </div>
+        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+</body>
+</html>

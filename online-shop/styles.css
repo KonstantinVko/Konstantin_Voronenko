@@ -1,0 +1,24 @@
+body {
+    background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+}
+.container {
+    margin: 0 auto;
+    padding: 20px;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+input[type='radio'] {
+    margin-left: 10px;
+}
+.container form > div {
+    border-bottom: 1px solid gray;
+    padding: 5px;
+}
+
+form {
+    width: 100%;
+}
+input[type='text'], input[type='number'] {
+    width: 60%;
+}
