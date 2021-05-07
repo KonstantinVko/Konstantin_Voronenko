@@ -23,3 +23,9 @@ form {
 input[type='text'], input[type='number'] {
     width: 60%;
 }
+
+form button[type='button'] {
+    background-color: royalblue;
+    color: white;
+    font-weight: bold;
+}

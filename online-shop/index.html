@@ -143,7 +143,40 @@
                 <button type="button" value="Сохранить" onclick="sendInfo()">Сохранить</button>
             </form>
         </div>
-        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+            <form>
+            <div>
+                <label for="size">Габариты</label>
+                <br>
+                <input type="text" id="size" name="size">
+            </div>
+            <div>
+                <label for="quantity">Количество</label>
+                <br>
+                <input type="number" id="quantity" name="quantity">
+            </div>
+            <div>
+                    <label for="name">Тип перевозки</label>
+                    <br>
+                    <p><select size="3" style="width: 40%" name="shop">
+                        <option value="avia">Авиа</option>
+                        <option value="onGround">Наземный</option>
+                        <option selected value="onWater">Водный</option>
+                    </select></p>
+            </div>
+                <div>
+                    <label for="rasSumm">Растаможка (сумма)</label>
+                    <br>
+                    <input type="number" id="rasSumm" name="rasSumm">
+                </div>
+            <div>
+                <label for="transportDate">Дата перевозки</label>
+                <br>
+                <input type="date" id="transportDate" name="transportDate">
+            </div>
+            <button type="button" value="Сохранить" onclick="sendInfo()">Сохранить</button>
+        </form>
+        </div>
     </div>
 </div>
 
