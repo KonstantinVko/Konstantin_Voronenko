@@ -1139,6 +1139,19 @@ document.addEventListener("DOMContentLoaded", () => {
     function handleTabletChange(e) {
         // Check if the media query is true
         if (e.matches) {
+            function disableScroll() {
+                // Get the current page scroll position
+                scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+
+                    // if any scroll is attempted, set this to the previous value
+                    window.onscroll = function() {
+                        window.scrollTo(scrollLeft, scrollTop);
+                    };
+            }
+            disableScroll();
+
+
             document.getElementById('start-msg').innerText = 'Нажмите на экран чтобы начать';
             document.querySelector('div.overlay-screen > h2:last-child').innerHTML = 'Для управления испульзуйте свайп вверх, вниз, влево, вправо';
 
@@ -1157,7 +1170,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 // move the Ghosts randomly
                 ghosts.forEach((ghost) => moveGhost(ghost));
             }, 2000)
-
 
         }
     }
