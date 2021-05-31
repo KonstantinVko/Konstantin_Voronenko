@@ -969,6 +969,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function pacDotEaten() {
         if (squares[pacmanCurrentIndex].classList.contains("pac-dot")) {
             score++;
+            window.navigator.vibrate(1000);
             if (score < 50) {
                 document.getElementById("score").classList.add("low-score");
             } else if (score > 100) {
@@ -1019,7 +1020,7 @@ document.addEventListener("DOMContentLoaded", () => {
         new Ghost("clyde", 379, 1400),
         new Ghost("clyde", 379, 1400),
         new Ghost("stinky", 379, 1400),
-        new Ghost("blinky", 379, 1400),
+        new Ghost("blinky", 379, 400),
     ];
 
     //draw my ghosts onto the grid
@@ -1086,7 +1087,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("game-over-screen").style.display = "flex";
             setTimeout(function () {
                 window.location.reload();
-            }, 3000);
+            }, 334423543000);
         }
     }
 
@@ -1130,13 +1131,31 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", startGame);
 
 
-    const mediaQuery = window.matchMedia('(max-width: 768px)')
+    const mediaQuery = window.matchMedia('(max-width: 1000px)')
 
     function handleTabletChange(e) {
         // Check if the media query is true
         if (e.matches) {
             document.getElementById('start-msg').innerText = 'Нажмите на экран чтобы начать';
             document.querySelector('div.overlay-screen > h2:last-child').innerHTML = 'Для управления испульзуйте свайп вверх, вниз, влево, вправо';
+
+            startAudio.play();
+            setTimeout(() => {
+                document.querySelector('.grid').style.opacity = '100';
+                document.querySelector('div.pac-man').style.opacity = '100';
+                document.removeEventListener("keydown", startGame);
+                document.removeEventListener('swiped', startGame);
+                //remove start screen
+                document.getElementById("start-screen").style.display = "none";
+                //set pacman velocity and enable movement
+                document.addEventListener("keyup", setPacmanVelocity);
+                document.addEventListener('swiped', setPacmanVelocity);
+                movePacman();
+                // move the Ghosts randomly
+                ghosts.forEach((ghost) => moveGhost(ghost));
+            }, 2000)
+
+
         }
     }
 
