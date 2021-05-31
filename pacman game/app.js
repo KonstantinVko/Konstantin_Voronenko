@@ -1095,9 +1095,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+
+    document.addEventListener('touchstart', startGame);
     //start the game when enter is pressed
     function startGame(event) {
-        if (event.keyCode === 13) {
+        console.log(event)
+        if (event.keyCode === 13|| event.type === "touchstart") {
             document.querySelector('div.pac-man').style.opacity = '100';
             document.removeEventListener("keydown", startGame);
             //remove start screen
