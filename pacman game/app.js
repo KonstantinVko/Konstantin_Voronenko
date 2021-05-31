@@ -837,12 +837,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector('div.pac-man').style.opacity = '0';
 
     let pacmanMovingClass;
+    let moveAudio = new Audio('http://gaschamber.hestfamily.com/tfc/sound/duckhunt/pac_chomp.wav');
+    let looseAudio = new Audio('http://gaschamber.hestfamily.com/tfc/sound/duckhunt/pac_die.wav');
+    looseAudio.volume = 0.5;
+    moveAudio.volume = 0.2;
+    moveAudio.playbackRate = 1.1;
 
     // set pacman velocity
     function setPacmanVelocity(e) {
         switch (e.keyCode) {
             case 37:
-                pacmanMovingClass = 'pac-man-go-left';
                 if (
                     pacmanCurrentIndex % width !== 0 &&
                     !squares[pacmanCurrentIndex - 1].classList.contains("wall") &&
@@ -850,37 +854,41 @@ document.addEventListener("DOMContentLoaded", () => {
                 ) {
                     pacmanVelocity.y = 0;
                     pacmanVelocity.x = 1;
+                    pacmanMovingClass = 'pac-man-go-left';
                 }
                 break;
             case 38:
-                pacmanMovingClass = 'pac-man-go-top'
+
                 if (
                     pacmanCurrentIndex - width >= 0 &&
                     !squares[pacmanCurrentIndex - width].classList.contains("wall") &&
                     !squares[pacmanCurrentIndex - width].classList.contains("ghost-lair")
                 ) {
+                    pacmanMovingClass = 'pac-man-go-top'
                     pacmanVelocity.y = 0;
                     pacmanVelocity.x = -1;
                 }
                 break;
             case 39:
-                pacmanMovingClass = 'pac-man-go-right'
+
                 if (
                     pacmanCurrentIndex % width < width - 1 &&
                     !squares[pacmanCurrentIndex + 1].classList.contains("wall") &&
                     !squares[pacmanCurrentIndex + 1].classList.contains("ghost-lair")
                 ) {
+                    pacmanMovingClass = 'pac-man-go-right'
                     pacmanVelocity.y = 1;
                     pacmanVelocity.x = 0;
                 }
                 break;
             case 40:
-                pacmanMovingClass = 'pac-man-go-bottom'
+
                 if (
                     pacmanCurrentIndex + width < width * width &&
                     !squares[pacmanCurrentIndex + width].classList.contains("wall") &&
                     !squares[pacmanCurrentIndex + width].classList.contains("ghost-lair")
                 ) {
+                    pacmanMovingClass = 'pac-man-go-bottom'
                     pacmanVelocity.y = -1;
                     pacmanVelocity.x = 0;
                 }
@@ -893,6 +901,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //move pacman
     function movePacman() {
+        squares[pacmanCurrentIndex].classList.remove(pacmanMovingClass);
         squares[pacmanCurrentIndex].classList.remove("pac-man");
         setInterval(() => {
             if (pacmanVelocity.x === 1 && pacmanVelocity.y === 0) {
@@ -904,6 +913,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     squares[pacmanCurrentIndex].classList.remove(pacmanMovingClass);
                     squares[pacmanCurrentIndex].classList.remove("pac-man");
                     pacmanCurrentIndex -= 1;
+                    moveAudio.play();
                 }
                 if (squares[pacmanCurrentIndex - 1] === squares[363]) {
                     pacmanCurrentIndex = 391;
@@ -918,6 +928,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     squares[pacmanCurrentIndex].classList.remove(pacmanMovingClass);
                     squares[pacmanCurrentIndex].classList.remove("pac-man");
                     pacmanCurrentIndex -= width;
+                    moveAudio.play();
                 }
             }
             if (pacmanVelocity.x === 0 && pacmanVelocity.y === 1) {
@@ -929,6 +940,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     squares[pacmanCurrentIndex].classList.remove(pacmanMovingClass);
                     squares[pacmanCurrentIndex].classList.remove("pac-man");
                     pacmanCurrentIndex += 1;
+                    moveAudio.play();
                 }
                 if (squares[pacmanCurrentIndex + 1] === squares[392]) {
                     pacmanCurrentIndex = 364;
@@ -943,6 +955,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     squares[pacmanCurrentIndex].classList.remove(pacmanMovingClass);
                     squares[pacmanCurrentIndex].classList.remove("pac-man");
                     pacmanCurrentIndex += width;
+                    moveAudio.play();
                 }
             }
             squares[pacmanCurrentIndex].classList.add(pacmanMovingClass);
@@ -974,7 +987,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (squares[pacmanCurrentIndex].classList.contains("power-pellet")) {
             score += 10;
             ghosts.forEach((ghost) => (ghost.isScared = true));
-            setTimeout(unScareGhosts, 10000);
+            setTimeout(unScareGhosts, 5000);
             squares[pacmanCurrentIndex].classList.remove("power-pellet");
             checkForWin();
         }
@@ -1052,7 +1065,6 @@ document.addEventListener("DOMContentLoaded", () => {
             checkForGameOver();
         }, ghost.speed);
     }
-
     //check for a game over
     function checkForGameOver() {
         if (
@@ -1063,6 +1075,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.removeEventListener("keyup", movePacman);
             pacmanVelocity.x = 0;
             pacmanVelocity.y = 0;
+            looseAudio.play();
             //display game over screen and refresh after 3s to rest game
             document.getElementById("game-over-screen").style.display = "flex";
             setTimeout(function () {
