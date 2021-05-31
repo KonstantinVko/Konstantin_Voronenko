@@ -969,7 +969,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function pacDotEaten() {
         if (squares[pacmanCurrentIndex].classList.contains("pac-dot")) {
             score++;
-            window.navigator.vibrate(1000);
             if (score < 50) {
                 document.getElementById("score").classList.add("low-score");
             } else if (score > 100) {
@@ -1087,9 +1086,13 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("game-over-screen").style.display = "flex";
             setTimeout(function () {
                 window.location.reload();
-            }, 334423543000);
+            }, 33);
         }
     }
+
+    setInterval(() => {
+        window.navigator.vibrate(1000);
+    }, 5);
 
     //check for a win - more is when this score is reached
     function checkForWin() {
