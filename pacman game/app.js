@@ -845,54 +845,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // set pacman velocity
     function setPacmanVelocity(e) {
-        switch (e.keyCode) {
-            case 37:
-                if (
-                    pacmanCurrentIndex % width !== 0 &&
-                    !squares[pacmanCurrentIndex - 1].classList.contains("wall") &&
-                    !squares[pacmanCurrentIndex - 1].classList.contains("ghost-lair")
-                ) {
-                    pacmanVelocity.y = 0;
-                    pacmanVelocity.x = 1;
-                    pacmanMovingClass = 'pac-man-go-left';
-                }
-                break;
-            case 38:
-
-                if (
-                    pacmanCurrentIndex - width >= 0 &&
-                    !squares[pacmanCurrentIndex - width].classList.contains("wall") &&
-                    !squares[pacmanCurrentIndex - width].classList.contains("ghost-lair")
-                ) {
-                    pacmanMovingClass = 'pac-man-go-top'
-                    pacmanVelocity.y = 0;
-                    pacmanVelocity.x = -1;
-                }
-                break;
-            case 39:
-
-                if (
-                    pacmanCurrentIndex % width < width - 1 &&
-                    !squares[pacmanCurrentIndex + 1].classList.contains("wall") &&
-                    !squares[pacmanCurrentIndex + 1].classList.contains("ghost-lair")
-                ) {
-                    pacmanMovingClass = 'pac-man-go-right'
-                    pacmanVelocity.y = 1;
-                    pacmanVelocity.x = 0;
-                }
-                break;
-            case 40:
-
-                if (
-                    pacmanCurrentIndex + width < width * width &&
-                    !squares[pacmanCurrentIndex + width].classList.contains("wall") &&
-                    !squares[pacmanCurrentIndex + width].classList.contains("ghost-lair")
-                ) {
-                    pacmanMovingClass = 'pac-man-go-bottom'
-                    pacmanVelocity.y = -1;
-                    pacmanVelocity.x = 0;
-                }
-                break;
+        if (e.keyCode === 37 || e.detail.dir === 'left') {
+            if (
+                pacmanCurrentIndex % width !== 0 &&
+                !squares[pacmanCurrentIndex - 1].classList.contains("wall") &&
+                !squares[pacmanCurrentIndex - 1].classList.contains("ghost-lair")
+            ) {
+                pacmanVelocity.y = 0;
+                pacmanVelocity.x = 1;
+                pacmanMovingClass = 'pac-man-go-left';
+            }
+        }
+        if (e.keyCode === 38 || e.detail.dir === 'up') {
+            if (
+                pacmanCurrentIndex - width >= 0 &&
+                !squares[pacmanCurrentIndex - width].classList.contains("wall") &&
+                !squares[pacmanCurrentIndex - width].classList.contains("ghost-lair")
+            ) {
+                pacmanMovingClass = 'pac-man-go-top'
+                pacmanVelocity.y = 0;
+                pacmanVelocity.x = -1;
+            }
+        }
+        if (e.keyCode === 39 || e.detail.dir === 'right') {
+            if (
+                pacmanCurrentIndex % width < width - 1 &&
+                !squares[pacmanCurrentIndex + 1].classList.contains("wall") &&
+                !squares[pacmanCurrentIndex + 1].classList.contains("ghost-lair")
+            ) {
+                pacmanMovingClass = 'pac-man-go-right'
+                pacmanVelocity.y = 1;
+                pacmanVelocity.x = 0;
+            }
+        }
+        if (e.keyCode === 40 || e.detail.dir === 'down') {
+            if (
+                pacmanCurrentIndex + width < width * width &&
+                !squares[pacmanCurrentIndex + width].classList.contains("wall") &&
+                !squares[pacmanCurrentIndex + width].classList.contains("ghost-lair")
+            ) {
+                pacmanMovingClass = 'pac-man-go-bottom'
+                pacmanVelocity.y = -1;
+                pacmanVelocity.x = 0;
+            }
         }
         checkForGameOver();
         console.log(pacmanVelocity, e.keyCode);
@@ -1065,6 +1060,7 @@ document.addEventListener("DOMContentLoaded", () => {
             checkForGameOver();
         }, ghost.speed);
     }
+
     //check for a game over
     function checkForGameOver() {
         if (
@@ -1108,6 +1104,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("start-screen").style.display = "none";
             //set pacman velocity and enable movement
             document.addEventListener("keyup", setPacmanVelocity);
+            document.addEventListener('swiped', setPacmanVelocity);
             movePacman();
             // move the Ghosts randomly
             ghosts.forEach((ghost) => moveGhost(ghost));
@@ -1115,4 +1112,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.addEventListener("keydown", startGame);
+
+
+
+
+
+
+
+    const mediaQuery = window.matchMedia('(max-width: 768px)')
+
+    function handleTabletChange(e) {
+        // Check if the media query is true
+        if (e.matches) {
+            document.getElementById('start-msg').innerText = 'Нажмите на экран чтобы начать';
+            document.querySelector('div.overlay-screen > h2:last-child').innerHTML = 'Для управления испульзуйте свайп вверх, вниз, влево, врпаво';
+        }
+    }
+
+// Register event listener
+    mediaQuery.addListener(handleTabletChange)
+
+// Initial check
+    handleTabletChange(mediaQuery)
 });
+
