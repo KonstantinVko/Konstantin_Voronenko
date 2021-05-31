@@ -323,34 +323,6 @@ document.addEventListener("DOMContentLoaded", () => {
         1,
         4,
         1,
-        1,
-        1,
-        2,
-        2,
-        1,
-        1,
-        1,
-        4,
-        1,
-        1,
-        0,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        0,
-        1,
-        1,
-        4,
-        1,
         2,
         2,
         2,
@@ -368,6 +340,34 @@ document.addEventListener("DOMContentLoaded", () => {
         1,
         1,
         1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        4,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        4,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
         4,
         4,
         4,
@@ -407,12 +407,12 @@ document.addEventListener("DOMContentLoaded", () => {
         1,
         4,
         1,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
+        1,
+        1,
+        1,
+        1,
+       1,
+        1,
         1,
         4,
         1,
@@ -837,11 +837,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector('div.pac-man').style.opacity = '0';
 
     let pacmanMovingClass;
+    let eatGhost = new Audio('http://gaschamber.hestfamily.com/tfc/sound/duckhunt/pac_ghosteat.wav');
+    let startAudio = new Audio('http://gaschamber.hestfamily.com/tfc/sound/duckhunt/pac_start.wav')
     let moveAudio = new Audio('http://gaschamber.hestfamily.com/tfc/sound/duckhunt/pac_chomp.wav');
     let looseAudio = new Audio('http://gaschamber.hestfamily.com/tfc/sound/duckhunt/pac_die.wav');
     looseAudio.volume = 0.5;
     moveAudio.volume = 0.2;
+    eatGhost.volume = 0.2;
     moveAudio.playbackRate = 1.1;
+    startAudio.playbackRate = 1.1;
+    startAudio.volume = 0.4;
 
     // set pacman velocity
     function setPacmanVelocity(e) {
@@ -1007,10 +1012,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //all my ghosts
     let ghosts = [
-        new Ghost("blinky", 348, 100),
-        new Ghost("stinky", 376, 400),
-        new Ghost("inky", 351, 300),
-        new Ghost("clyde", 379, 200),
+        new Ghost("blinky", 348, 200),
+        new Ghost("stinky", 376, 800),
+        new Ghost("inky", 351, 1400),
+        new Ghost("clyde", 379, 1400),
+        new Ghost("clyde", 379, 1400),
+        new Ghost("clyde", 379, 1400),
+        new Ghost("stinky", 379, 1400),
+        new Ghost("blinky", 379, 1400),
     ];
 
     //draw my ghosts onto the grid
@@ -1022,7 +1031,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function moveGhost(ghost) {
         const directions = [-1, +1, width, -width];
         let direction = directions[Math.floor(Math.random() * directions.length)];
-
         ghost.timerId = setInterval(function () {
             //if the next square your ghost is going to go to does not have a ghost and does not have a wall
             if (
@@ -1048,6 +1056,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ghost.isScared &&
                 squares[ghost.currentIndex].classList.contains("pac-man")
             ) {
+                eatGhost.play();
                 squares[ghost.currentIndex].classList.remove(
                     ghost.className,
                     "ghost",
@@ -1069,6 +1078,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ) {
             ghosts.forEach((ghost) => clearInterval(ghost.timerId));
             document.removeEventListener("keyup", movePacman);
+            document.removeEventListener('swiped', setPacmanVelocity);
             pacmanVelocity.x = 0;
             pacmanVelocity.y = 0;
             looseAudio.play();
@@ -1096,30 +1106,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    document.addEventListener('touchstart', startGame);
     //start the game when enter is pressed
     function startGame(event) {
         console.log(event)
-        if (event.keyCode === 13|| event.type === "touchstart") {
-            document.querySelector('div.pac-man').style.opacity = '100';
-            document.removeEventListener("keydown", startGame);
-            //remove start screen
-            document.getElementById("start-screen").style.display = "none";
-            //set pacman velocity and enable movement
-            document.addEventListener("keyup", setPacmanVelocity);
-            document.addEventListener('swiped', setPacmanVelocity);
-            movePacman();
-            // move the Ghosts randomly
-            ghosts.forEach((ghost) => moveGhost(ghost));
+        if (event.keyCode === 13 || event.type === 'touchstart') {
+            startAudio.play();
+            setTimeout(() => {
+                document.querySelector('div.pac-man').style.opacity = '100';
+                document.removeEventListener("keydown", startGame);
+                document.removeEventListener('swiped', startGame);
+                //remove start screen
+                document.getElementById("start-screen").style.display = "none";
+                //set pacman velocity and enable movement
+                document.addEventListener("keyup", setPacmanVelocity);
+                document.addEventListener('swiped', setPacmanVelocity);
+                movePacman();
+                // move the Ghosts randomly
+                ghosts.forEach((ghost) => moveGhost(ghost));
+            }, 2000)
         }
     }
 
     document.addEventListener("keydown", startGame);
-
-
-
-
-
 
 
     const mediaQuery = window.matchMedia('(max-width: 768px)')
@@ -1128,7 +1136,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Check if the media query is true
         if (e.matches) {
             document.getElementById('start-msg').innerText = 'Нажмите на экран чтобы начать';
-            document.querySelector('div.overlay-screen > h2:last-child').innerHTML = 'Для управления испульзуйте свайп вверх, вниз, влево, врпаво';
+            document.querySelector('div.overlay-screen > h2:last-child').innerHTML = 'Для управления испульзуйте свайп вверх, вниз, влево, вправо';
         }
     }
 
