@@ -837,10 +837,15 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector('div.pac-man').style.opacity = '0';
 
     let pacmanMovingClass;
-    let eatGhost = new Audio('http://gaschamber.hestfamily.com/tfc/sound/duckhunt/pac_ghosteat.wav');
-    let startAudio = new Audio('http://gaschamber.hestfamily.com/tfc/sound/duckhunt/pac_start.wav')
-    let moveAudio = new Audio('http://gaschamber.hestfamily.com/tfc/sound/duckhunt/pac_chomp.wav');
-    let looseAudio = new Audio('http://gaschamber.hestfamily.com/tfc/sound/duckhunt/pac_die.wav');
+    let eatGhost = new Audio();
+    eatGhost.src ='./audio/eatghost.wav';
+    let startAudio = new Audio();
+    startAudio.src = './audio/pac_start.wav';
+    let moveAudio = new Audio();
+    moveAudio.src = './audio/pac_chomp.wav';
+    let looseAudio = new Audio();
+    looseAudio.src = '/audio/pac_die';
+
     looseAudio.volume = 0.5;
     moveAudio.volume = 0.2;
     eatGhost.volume = 0.2;
