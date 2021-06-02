@@ -1153,7 +1153,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             document.getElementById('start-msg').innerText = 'Нажмите на экран чтобы начать';
-            document.querySelector('div.overlay-screen > h2:last-child').innerHTML = 'Для управления испульзуйте свайп вверх, вниз, влево, вправо';
+            document.querySelector('div.overlay-screen > h2:nth-child(2)').innerHTML = 'Для управления испульзуйте свайп вверх, вниз, влево, вправо';
 
             startAudio.play();
             setTimeout(() => {
